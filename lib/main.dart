@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ui_coffee_shop/pages/home_page.dart';
 import 'package:ui_coffee_shop/pages/splash_page.dart';
 
 void main() {
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: SplashPage(),
+      home: HomePage(),
     );
   }
 }
