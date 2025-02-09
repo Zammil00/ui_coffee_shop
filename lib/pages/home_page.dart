@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../widget/category_item_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -43,13 +44,6 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        actions: [
-          IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.filter_list,
-              ))
-        ],
       ),
       body: Column(
         children: [
@@ -72,34 +66,25 @@ class _HomePageState extends State<HomePage> {
                         hintText: "Cari Kopi"),
                   ),
                 ),
-                SizedBox(
-                  width: 15,
-                ),
+                SizedBox(width: 15),
                 SizedBox(
                   width: 55,
                   height: 55,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.brown,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+                        color: Colors.brown,
+                        borderRadius: BorderRadius.circular(10)),
                     child: IconButton(
                       onPressed: () {},
-                      icon: Icon(
-                        Icons.list,
-                        size: 35,
-                        color: Colors.white,
-                      ),
+                      icon: Icon(Icons.list, size: 35, color: Colors.white),
                     ),
                   ),
                 ),
               ],
             ),
           ),
-
           SizedBox(height: 10),
-
-          // Promo Banner
+          // PROMO BANNER 111111111111111111111111111111111111111111111111111111
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: Container(
@@ -139,8 +124,45 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           SizedBox(height: 20),
+          // KATEGOTY FILTERRRR !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+          SizedBox(
+            height: 40,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              children: [
+                _buildCategoryItem("Semua Kopi", true),
+                _buildCategoryItem("Kopi Susu", false),
+                _buildCategoryItem("Teh Dingin", false),
+                _buildCategoryItem("Kopi Khop", false),
+                _buildCategoryItem("Kopi Kenangan", false),
+              ],
+            ),
+          )
         ],
       ),
     );
   }
+}
+
+Widget _buildCategoryItem(String title, bool isSelected) {
+  bool isSelected = false;
+
+  void Isklik() {
+    isSelected = true;
+  }
+
+  return Padding(
+    padding: EdgeInsets.only(right: 10),
+    child: Chip(
+      label: Text(
+        title,
+        style: TextStyle(
+          color: isSelected ? Colors.white : Colors.black,
+        ),
+      ),
+      backgroundColor: isSelected ? Colors.brown : Colors.white,
+    ),
+  );
 }
