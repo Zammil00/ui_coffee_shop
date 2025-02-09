@@ -10,6 +10,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool isSelected = false;
+
+  void isKlik() {
+    isSelected = true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -132,14 +138,59 @@ class _HomePageState extends State<HomePage> {
               scrollDirection: Axis.horizontal,
               padding: EdgeInsets.symmetric(horizontal: 20),
               children: [
-                _buildCategoryItem("Semua Kopi", true),
-                _buildCategoryItem("Kopi Susu", false),
-                _buildCategoryItem("Teh Dingin", false),
-                _buildCategoryItem("Kopi Khop", false),
-                _buildCategoryItem("Kopi Kenangan", false),
+                ElevatedButton(
+                  onPressed: () {
+                    isKlik();
+                    setState(() {});
+                  },
+                  child: Chip(
+                    label: Text(
+                      "Kopi Labil",
+                      style: TextStyle(
+                        color: isSelected == true ? Colors.white : Colors.black,
+                      ),
+                    ),
+                    backgroundColor:
+                        isSelected == true ? Colors.brown : Colors.white,
+                  ),
+                ),
+                _buildCategoryItem("Kopi Pamalang", isSelected),
+                _buildCategoryItem("Kopi Pamalang", isSelected),
+                _buildCategoryItem("Kopi Pamalang", isSelected),
+                _buildCategoryItem("Kopi Pamalang", isSelected),
+                _buildCategoryItem("Kopi Pamalang", isSelected),
+                _buildCategoryItem("Kopi Pamalang", isSelected),
+                _buildCategoryItem("Kopi Pamalang", isSelected),
+                _buildCategoryItem("Kopi Pamalang", isSelected),
               ],
             ),
-          )
+          ),
+          SizedBox(height: 10),
+          // Coffee Grid
+          Expanded(
+            child: GridView.count(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              crossAxisCount: 2,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+              childAspectRatio: 0.75,
+              children: [
+                _buildCoffeeCard("Caffe Mocha", "Deep Foam", "4.53"),
+                _buildCoffeeCard("Flat White", "Espresso", "3.53"),
+              ],
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.black,
+        selectedItemColor: Colors.orange,
+        unselectedItemColor: Colors.grey,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite_border), label: ""),
+          BottomNavigationBarItem(icon: Icon(Icons.shopping_bag), label: ""),
+          BottomNavigationBarItem(icon: Icon(Icons.notifications), label: ""),
         ],
       ),
     );
@@ -147,22 +198,61 @@ class _HomePageState extends State<HomePage> {
 }
 
 Widget _buildCategoryItem(String title, bool isSelected) {
-  bool isSelected = false;
-
-  void Isklik() {
-    isSelected = true;
-  }
-
-  return Padding(
-    padding: EdgeInsets.only(right: 10),
+  return ElevatedButton(
+    onPressed: () {},
     child: Chip(
       label: Text(
         title,
         style: TextStyle(
-          color: isSelected ? Colors.white : Colors.black,
+          color: isSelected == true ? Colors.white : Colors.black,
         ),
       ),
-      backgroundColor: isSelected ? Colors.brown : Colors.white,
+      backgroundColor: isSelected == true ? Colors.brown : Colors.white,
+    ),
+  );
+}
+
+Widget _buildCoffeeCard(String title, String subtitle, String price) {
+  return Container(
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(15),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image:
+                    AssetImage("assets/coffee.jpg"), // Ganti dengan gambar asli
+                fit: BoxFit.cover,
+              ),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
+            ),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
+              Text(subtitle, style: TextStyle(color: Colors.grey)),
+              SizedBox(height: 5),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("\$ $price",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  Icon(Icons.add, color: Colors.orange),
+                ],
+              )
+            ],
+          ),
+        )
+      ],
     ),
   );
 }
