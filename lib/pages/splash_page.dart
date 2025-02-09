@@ -8,76 +8,74 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.black,
-        body: Center(
+        body: SafeArea(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Image.asset(
-                "assets/images/Onboarding.png",
-                width: 550,
-                height: 550,
+              Expanded(
+                child: Image.asset(
+                  "assets/images/Onboarding.png",
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 25,
-                ),
-                child: Text(
-                  "Fall in Love with Coffee in Blissful Delight !",
-                  style: GoogleFonts.sora(
-                    color: Colors.white,
-                    fontSize: 32,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: Text(
-                  "Welcome to our cozy coffee corner, where every cup is a delightful for you.",
-                  style: GoogleFonts.sora(
-                    color: Colors.white,
-                    fontSize: 14,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              ElevatedButton(
-                style: ButtonStyle(
-                    backgroundColor: WidgetStatePropertyAll(Colors.brown),
-                    padding: WidgetStatePropertyAll(
-                      EdgeInsets.symmetric(
-                        horizontal: 120,
-                        vertical: 15,
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Fall in Love with Coffee in Blissful Delight!",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.sora(
+                        color: Colors.white,
+                        fontSize: 28,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
-                    shape: WidgetStatePropertyAll(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                          10,
+                    const SizedBox(height: 10),
+                    Text(
+                      "Welcome to our cozy coffee corner, where every cup is a delightful experience for you.",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.sora(
+                        color: Colors.white70,
+                        fontSize: 14,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.brown,
+                          padding: const EdgeInsets.symmetric(vertical: 15),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const HomePage(),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          "Get Started",
+                          style: GoogleFonts.sora(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
-                    )),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => HomePage(),
                     ),
-                  );
-                },
-                child: Text(
-                  "Get Started",
-                  style: GoogleFonts.sora(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
+                    const SizedBox(height: 20),
+                  ],
                 ),
               ),
             ],
